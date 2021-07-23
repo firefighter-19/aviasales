@@ -1,11 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import classes from './App.module.scss';
 
 const App: React.FC = () => {
     return (
-        <div className="App">
-            <header className="App-header">
+        <div className={classes.App}>
+            <header className={classes.App_header}>
                 <img src={logo} className="App-logo" alt="logo" />
                 <p>
                     Edit <code>src/App.tsx</code> and save to reload.
