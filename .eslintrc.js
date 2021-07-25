@@ -30,5 +30,8 @@ module.exports = {
         'react/prop-types': 'off',
         // We don't want unused vars
         '@typescript-eslint/no-unused-vars': ['error'],
+        "import/prefer-default-export": "off",
+        "react/prop-types": "off",
+        "react/require-default-props": "off",
     },
 };
