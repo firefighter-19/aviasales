@@ -2,8 +2,10 @@ import React from 'react';
 
 import classes from './Aside.module.scss';
 
-interface AsideProps { }
+interface AsideProps {
+    data: any;
+}
 
-export function Aside({ }: AsideProps): JSX.Element {
-    return <div>Hello React Typescript</div>;
+export function Aside({ data }: AsideProps): JSX.Element {
+    return <aside className={classes.aside}>Privet{data}</aside>;
 }
