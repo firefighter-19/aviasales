@@ -1,3 +1,8 @@
+export interface TicketsTypes {
+    tickets: Ticket[];
+    stop: boolean;
+}
+
 export interface Ticket {
     price: number;
     carrier: string;

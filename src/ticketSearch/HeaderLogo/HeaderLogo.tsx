@@ -1,11 +1,11 @@
 import React from 'react';
 
-import classes from './Header.module.scss';
+import classes from './HeaderLogo.module.scss';
 
 interface HeaderProps {
     children: JSX.Element;
 }
 
-export function Header({ children }: HeaderProps): JSX.Element {
+export function HeaderLogo({ children }: HeaderProps): JSX.Element {
     return <header className={classes.header}>{children}</header>;
 }
