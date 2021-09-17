@@ -1,26 +1,82 @@
-import React from 'react';
-import { Icon } from '../../common/Icon';
-import { useFetch } from '../../hooks/useFetch';
-import { TicketId } from '../../interfaces';
-import { HeaderLogo } from '../HeaderLogo';
-import { TicketsList } from '../searchAvia/TIcketsList';
-import { NavigationBar } from '../searchAvia/TIcketsList/NavigationBar';
+import React, { useEffect, useState } from 'react';
+import { useFetch } from '../../hooks';
+import { Ticket, TicketId, TicketsTypes } from '../../interfaces';
+import { NavigationBar } from './NavigationBar';
+import { Tab } from './Tab';
 
 import classes from './Main.module.scss';
+import { TicketBox } from '../TicketBox';
 
-const AVIASALES_URL = 'https://front-test.beta.aviasales.ru/search';
+export function Main({ searchId }: TicketId): JSX.Element {
+    const [sortedByTabTickets, setSortedByTabTickets] = useState<Ticket[]>([]);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [sortedByNavbarTickets, setSortedByNavbarTickets] = useState<Ticket[]>([]);
+    const { data, error } = useFetch<TicketsTypes>({
+        url: `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`,
+        options: {
+            method: 'GET',
+        },
+    });
 
-export function Main(): JSX.Element {
-    const { data, error } = useFetch<TicketId>({ url: `${AVIASALES_URL}` });
-    if (error) return <p>Произошла ошибка при загрузке данных</p>;
-    if (!data) return <p>Загрузка...</p>;
+    function updateTicketList(ticketList: Ticket[]): void {
+        setSortedByNavbarTickets(ticketList);
+    }
+
+    function sortByPrice(): void {
+        if (data) {
+            const sortedByPrice = [...data.tickets].sort((a, b) => a.price - b.price);
+            setSortedByTabTickets(sortedByPrice);
+        }
+    }
+
+    function sortByTime(): void {
+        if (data) {
+            const sortedByTime = [...data.tickets].sort((a, b) => {
+                const segmentTimeA = a.segments.find((segment) => segment.duration);
+                const segmentTimeB = b.segments.find((segment) => segment.duration);
+                if (segmentTimeB && segmentTimeA) {
+                    return segmentTimeB?.duration < segmentTimeA?.duration ? 1 : -1;
+                }
+                return 0;
+            });
+            setSortedByTabTickets(sortedByTime);
+        }
+    }
+
+    function sortTicketsByChosenTab(id: string): void {
+        const sortObject = {
+            '1': sortByPrice,
+            '2': sortByTime,
+        };
+        // @ts-ignore
+        return sortObject[id]();
+    }
+
+    useEffect(() => {
+        if (data && data.stop) {
+            sortByPrice();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data]);
+
     return (
-        <div className={classes.wrapper}>
-            <HeaderLogo>
-                <Icon id="logo_aero" />
-            </HeaderLogo>
-            <NavigationBar />
-            <TicketsList searchId={data.searchId} />
-        </div>
+        <>
+            {!data && !error && <p>Загрузка...</p>}
+            {error && <p>Ошибка</p>}
+            {!!sortedByTabTickets.length && (
+                <nav className={classes.main}>
+                    <NavigationBar
+                        sortedByTabTickets={sortedByTabTickets}
+                        updateTicketList={updateTicketList}
+                    />
+                    <Tab sortTicketsByChosenTab={sortTicketsByChosenTab} />
+                </nav>
+            )}
+            <section className={classes.ticketList}>
+                {sortedByNavbarTickets.map((ticket) => (
+                    <TicketBox key={ticket.price} ticket={ticket} />
+                ))}
+            </section>
+        </>
     );
 }
