@@ -33,6 +33,9 @@ module.exports = {
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
         "react/require-default-props": "off",
-        "react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "multiline" }]
+        "react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "multiline" }],
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/dot-notation": "off"
     },
 };
