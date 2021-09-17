@@ -16,7 +16,6 @@ interface Props {
     options?: RequestInit;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useFetch<T>({ url, options }: Props): State<T> {
     const cancelRequest = useRef<boolean>(false);
 
