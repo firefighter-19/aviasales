@@ -1,0 +1,30 @@
+.tab__container {
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    max-height: 45px;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    padding: 0 49px;
+    cursor: pointer;
+    &:first-child {
+        border-radius: 5px 0px 0px 5px;
+        border: 1px solid #C4C4C4;
+    }
+    &:last-child {
+        border-radius: 0px 5px 5px 0px;
+        border-width: 1px 1px 1px 0px;
+        border: 1px solid #C4C4C4;
+    }
+}
+
+.tab_active {
+    border: none;
+    background-color: #2196F3;
+    color: white;
+}
