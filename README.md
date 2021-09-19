@@ -1,3 +1,7 @@
+## Avia sales test task
+
+Used: ReactJS, Typescript;
+
 ## Available Scripts
 
 In the project directory, you can run:
