@@ -9,7 +9,6 @@ import { TicketBox } from '../TicketBox';
 
 export function Main({ searchId }: TicketId): JSX.Element {
     const [sortedByTabTickets, setSortedByTabTickets] = useState<Ticket[]>([]);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [sortedByNavbarTickets, setSortedByNavbarTickets] = useState<Ticket[]>([]);
     const [chosenTabId, setChosenTabId] = useState<string>('1');
     const { data, error } = useFetch<TicketsTypes>({
