@@ -6,10 +6,15 @@ import classes from './NavigationBar.module.scss';
 
 interface Props {
     sortedByTabTickets: Ticket[];
+    chosenTabId: string;
     updateTicketList(ticketList: Ticket[]): void;
 }
 
-export function NavigationBar({ sortedByTabTickets, updateTicketList }: Props): JSX.Element {
+export function NavigationBar({
+    sortedByTabTickets,
+    chosenTabId,
+    updateTicketList,
+}: Props): JSX.Element {
     const checkboxes = [
         { id: '1', text: 'Без пересадок', checked: false, stops: 0 },
         { id: '3', text: '1 пересадки', checked: false, stops: 1 },
@@ -62,13 +67,13 @@ export function NavigationBar({ sortedByTabTickets, updateTicketList }: Props): 
             });
             updateTicketList(sortedTicketsByStops);
         } else {
-            updateTicketList(sortedByTabTickets);
+            updateTicketList([]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [checkboxToggler]);
+    }, [checkboxToggler, chosenTabId]);
 
     return (
-        <div className={classes.navigationBar}>
+        <nav className={classes.navigationBar}>
             <div className={classes.navigationBar__wrapper}>
                 <p className={classes.navigationBar__text}>Количество пересадок</p>
                 <Checkbox
@@ -87,6 +92,6 @@ export function NavigationBar({ sortedByTabTickets, updateTicketList }: Props): 
                     />
                 ))}
             </div>
-        </div>
+        </nav>
     );
 }
