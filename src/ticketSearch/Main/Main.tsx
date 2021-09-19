@@ -11,6 +11,7 @@ export function Main({ searchId }: TicketId): JSX.Element {
     const [sortedByTabTickets, setSortedByTabTickets] = useState<Ticket[]>([]);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [sortedByNavbarTickets, setSortedByNavbarTickets] = useState<Ticket[]>([]);
+    const [chosenTabId, setChosenTabId] = useState<string>('1');
     const { data, error } = useFetch<TicketsTypes>({
         url: `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`,
         options: {
@@ -44,6 +45,7 @@ export function Main({ searchId }: TicketId): JSX.Element {
     }
 
     function sortTicketsByChosenTab(id: string): void {
+        setChosenTabId(id);
         const sortObject = {
             '1': sortByPrice,
             '2': sortByTime,
@@ -64,19 +66,20 @@ export function Main({ searchId }: TicketId): JSX.Element {
             {!data && !error && <p>Загрузка...</p>}
             {error && <p>Ошибка</p>}
             {!!sortedByTabTickets.length && (
-                <nav className={classes.main}>
+                <section className={classes.main}>
                     <NavigationBar
                         sortedByTabTickets={sortedByTabTickets}
                         updateTicketList={updateTicketList}
+                        chosenTabId={chosenTabId}
                     />
-                    <Tab sortTicketsByChosenTab={sortTicketsByChosenTab} />
-                </nav>
+                    <div>
+                        <Tab sortTicketsByChosenTab={sortTicketsByChosenTab} />
+                        {sortedByNavbarTickets.map((ticket) => (
+                            <TicketBox key={ticket.price} ticket={ticket} />
+                        ))}
+                    </div>
+                </section>
             )}
-            <section className={classes.ticketList}>
-                {sortedByNavbarTickets.map((ticket) => (
-                    <TicketBox key={ticket.price} ticket={ticket} />
-                ))}
-            </section>
         </>
     );
 }
