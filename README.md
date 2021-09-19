@@ -3,7 +3,7 @@
 Used: ReactJS, Typescript, Date-fns, SCSS(modules), classnames;
 
 ### Demo
-![Demo AviaSales](https://media0.giphy.com/media/QTE02RMXNtvH2u7n0N/giphy.gif?cid=790b7611cfe385c07574e0c511e5a318026bb3591db10a84&rid=giphy.gif)
+![Demo AviaSales](https://media0.giphy.com/media/QTE02RMXNtvH2u7n0N/giphy.gif)
 
 ## Available Scripts
 
