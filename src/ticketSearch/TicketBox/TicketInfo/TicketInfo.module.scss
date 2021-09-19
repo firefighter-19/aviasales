@@ -1,0 +1,52 @@
+.ticketInfo__segments {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.ticketInfo__timeZone {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.ticketInfo__destination {
+    display: flex;
+    font-size: 12px;
+    color: #C4C4C4;
+    margin-bottom: 5px;
+}
+
+.ticketInfo__time {
+    display: flex;
+}
+
+.ticketInfo__duration {
+    margin-bottom: 15px;
+}
+
+.ticketInfo__route {
+    font-size: 12px;
+    color: #C4C4C4;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.ticketInfo__stopsBlock {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.ticketInfo__stopsTitle {
+    color: #C4C4C4;
+    margin-bottom: 5px;
+}
+
+.ticketInfo__stopsMain {
+    display: flex;
+}
+
+.ticketInfo__stops {
+    font-size: 16px;
+    margin-right: 3px;
+}
