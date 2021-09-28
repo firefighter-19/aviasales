@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox component testing It should return Checkboxes components due to checkbox array length 1`] = `
+Array [
+  ShallowWrapper {},
+  ShallowWrapper {},
+  ShallowWrapper {},
+  ShallowWrapper {},
+]
+`;
